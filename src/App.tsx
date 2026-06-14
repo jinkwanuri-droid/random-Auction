@@ -931,23 +931,23 @@ export default function App() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-start">
             {(['TOP', 'JGL', 'MID', 'BOT', 'SUP'] as const).map(role => {
               const rolePlayers = MOCK_PLAYERS.filter(p => p.role === role);
               return (
                 <div 
                   key={role} 
-                  className="bg-[#121318] border border-white/5 rounded-2xl p-4 flex flex-col"
+                  className="bg-[#121318] border border-white/5 rounded-xl p-3 flex flex-col"
                   style={{ height: 'auto' }} // Disable fixed heights for natural expansion
                 >
-                  <h4 className="text-[#5bff14] font-black text-base mb-3.5 pb-2.5 border-b border-white/10 flex justify-between items-center px-1">
-                    <span className="tracking-widest font-black text-lg">{role}</span>
-                    <span className="text-[10px] font-black text-slate-400 bg-white/5 px-2 py-0.5 rounded">
+                  <h4 className="text-[#5bff14] font-black text-sm mb-2.5 pb-2 border-b border-white/10 flex justify-between items-center px-0.5">
+                    <span className="tracking-widest font-black text-base">{role}</span>
+                    <span className="text-[9px] font-black text-slate-400 bg-white/5 px-2 py-0.5 rounded">
                       {rolePlayers.length}명
                     </span>
                   </h4>
                   
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     {rolePlayers.map(p => {
                       const status = getPlayerStatus(p);
                       const isHighlight = highlightedPlayerId === p.id;
@@ -964,40 +964,40 @@ export default function App() {
                             }
                           }}
                           animate={isHighlight ? { 
-                            scale: 1.05, 
+                            scale: 1.03, 
                             borderColor: '#5bff14', 
-                            boxShadow: '0 0 25px rgba(91, 255, 20, 0.7)',
-                            backgroundColor: 'rgba(91, 255, 20, 0.2)'
+                            boxShadow: '0 0 20px rgba(91, 255, 20, 0.6)',
+                            backgroundColor: 'rgba(91, 255, 20, 0.15)'
                           } : { 
                             scale: 1,
                             borderColor: isUnsold ? 'rgba(239, 68, 68, 0.3)' : 'rgba(255, 255, 255, 0.05)',
                             backgroundColor: isUnsold ? 'rgba(239, 68, 68, 0.05)' : 'rgba(0,0,0,0.2)'
                           }}
                           transition={{ duration: 0.12 }}
-                          className={`border rounded-xl p-3 flex justify-between items-center text-sm group ${
+                          className={`border rounded-lg p-2.5 flex justify-between items-center text-xs group ${
                             isWaiting || isUnsold ? 'hover:border-[#5bff14]/40 hover:bg-[#5bff14]/5 cursor-pointer' : 'opacity-65 select-none'
                           }`}
                         >
-                          <div className="min-w-0 flex-1 pr-2">
-                            <div className={`font-bold transition-colors ${
+                          <div className="min-w-0 flex-1 pr-1.5">
+                            <div className={`font-black text-xs md:text-[13px] transition-colors truncate ${
                               isHighlight ? 'text-[#5bff14]' : 
                               isUnsold ? 'text-red-400 group-hover:text-red-300' : 
                               isDrafted ? 'text-slate-500' : 'text-white group-hover:text-[#5bff14]'
                             }`}>
                               {p.name}
                             </div>
-                            <div className="text-[10px] text-slate-500 mt-0.5 truncate font-medium">
-                              현재 {p.currentTier} / 최고 {p.peakTier}
+                            <div className="text-[9px] text-slate-500 mt-0.5 truncate font-bold">
+                              {p.currentTier} / {p.peakTier}
                             </div>
                           </div>
                           
-                          <div className={`text-[9px] px-2.5 py-1 rounded font-black whitespace-nowrap shrink-0 transition-colors ${
+                          <div className={`text-[8.5px] px-1.5 py-0.5 rounded font-black whitespace-nowrap shrink-0 transition-colors ${
                             isDrafted ? 'bg-[#5bff14]/10 text-slate-400 border border-white/5' :
                             isUnsold ? 'bg-red-500/10 text-red-500 border border-red-500/20' :
                             status === '경매중' ? 'bg-[#5bff14]/20 text-[#5bff14] border border-[#5bff14]/40 animate-pulse' :
                             'bg-white/5 text-slate-400 border border-white/5 group-hover:bg-[#5bff14]/10 group-hover:text-[#5bff14]'
                           }`}>
-                            {isDrafted ? `${status} 낙찰` : status}
+                            {isDrafted ? `${status.substring(0, 2)}` : status}
                           </div>
                         </motion.div>
                       );
