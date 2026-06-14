@@ -9,4 +9,31 @@
   body {
     @apply bg-[#0a0a0c] text-slate-200 font-sans antialiased;
   }
+
+  /* Webkit 브라우저를 위한 미니멀하고 세련된 스크롤바 디자인 */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(10, 10, 12, 0.5);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(91, 255, 20, 0.45);
+    box-shadow: 0 0 10px rgba(91, 255, 20, 0.2);
+  }
+
+  /* Firefox 대응 */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.08) rgba(10, 10, 12, 0.5);
+  }
 }
